@@ -16,16 +16,24 @@ var bio = {
 
 var projects = {
 	"projects" : [ 
-	{
-		"title": "U-DASH",
-		"dates": "2012 to present",
-		"description": "Served as the designer and recently as an iOS developer of a dashboard iPad application used by AT&T technician supervisors to manage technicians and jobs"
-	},
-	{
-		"title": "MIS Express",
-		"dates": "2012 to 2014",
-		"description": "Served as team lead and designer of this iPad application used by AT&T enterprise sales executives to qualify, contract and order AT&T data and voice services for small and mid size enterprise customers."
-	}	
+	   {
+    		"title": "U-DASH",
+    		"dates": "2012 to present",
+    		"description": "Served as the designer and recently as an iOS developer of a dashboard iPad application used by AT&T technician supervisors to manage technicians and jobs",
+            "images" : [
+                "images/fry.jpg",
+                "images/fry.jpg"
+            ]
+    	},
+    	{
+    		"title": "MIS Express",
+    		"dates": "2012 to 2014",
+    		"description": "Served as team lead and designer of this iPad application used by AT&T enterprise sales executives to qualify, contract and order AT&T data and voice services for small and mid size enterprise customers.",
+            "images" : [
+                "images/fry.jpg",
+                "images/fry.jpg"
+            ]
+    	}	
 	]
 };
 
@@ -95,16 +103,17 @@ $("#header").append(formattedWelcomeMessage);
 // add picture to header
 
 
-
-if (bio.skills.length > 0) {
-	$("#header").append(HTMLskillsStart);
-	for (skill in bio.skills) {
-		var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
-		$("#skills").append(formattedSkill);
+function displayHeaderInfo() {
+	if (bio.skills.length > 0) {
+		$("#header").append(HTMLskillsStart);
+		for (skill in bio.skills) {
+			var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
+			$("#skills").append(formattedSkill);
+		}
 	}
 }
 
-function displayWork () {
+function displayWork() {
 	for (job in work.jobs) {
 		$("#workExperience").append(HTMLworkStart);
 
@@ -124,9 +133,41 @@ function displayWork () {
 	} 
 }
 
+function inName(name) {
+	var nameArray = name.trim().split(" ");
+	var name1 = nameArray[0];
+	var name2 = nameArray[1];
+
+	name2 = name2.toUpperCase();
+	name1 = name1.slice(0,1).toLowerCase() + name1.slice(1).toLowerCase();
+	return name1 + " " + name2;
+}
+
+
+displayHeaderInfo();
 displayWork();
 
+projects.display = function() { 
+    projectsArr = projects.projects;
+    for (var project in projectsArr) {
+        $("#projects").append(HTMLprojectStart);
+        var formattedTitle = HTMLprojectTitle.replace("%data%", projectsArr[project].title);
+        var formattedDates = HTMLprojectDates.replace("%data%", projectsArr[project].dates);
+        var formattedDescription = HTMLprojectDescription.replace("%data%", projectsArr[project].description);
+            
+        $(".project-entry:last").append(formattedTitle);
+        $(".project-entry:last").append(formattedDates);
+        $(".project-entry:last").append(formattedDescription);
 
+        var imagesArr = projectsArr[project].images
+        for (var image in imagesArr) {
+            var formattedImage = HTMLprojectImage.replace("%data%", imagesArr[image]);
+            $(".project-entry:last").append(formattedImage);
+        }
+    }
+};
+
+projects.display();
 
 
 //test html
