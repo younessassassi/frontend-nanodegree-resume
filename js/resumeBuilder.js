@@ -4,6 +4,7 @@ var bio = {
     "welcomeMessage": "Experienced, motivated and driven professional, looking to challenge myself while having a positive impact on people's lives",
     "contacts": {
         "email": "youness.assassi@gmail.com",
+        "location": "Randolph, NJ",
         "picture": "images/fry.jpg"
     },
     "skills": [
@@ -168,6 +169,8 @@ projects.display = function() {
 };
 
 projects.display();
+
+$("#mapDiv").append(googleMap);
 
 
 //test html
