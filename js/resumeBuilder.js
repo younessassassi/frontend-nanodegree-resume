@@ -19,21 +19,44 @@ var bio = {
 };
 
 bio.display = function() {
-    var formattedName = HTMLheaderName.replace("%data%", bio.name);
     var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-    var formattedWelcomeMessage = HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage);
-    var profilePicture = HTMLbioPic.replace("%data%", bio.biopic);
+    $("#header").prepend(formattedRole);
 
-    $("#header").append(formattedName);
-    $("#header").append(formattedRole);
-    $("#header").append(profilePicture);
+    var formattedName = HTMLheaderName.replace("%data%", bio.name);
+    $("#header").prepend(formattedName);
+
+    var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+    $("#topContacts").append(formattedMobile);
+    $("#footerContacts").append(formattedMobile);
+
+
+    var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+    $("#topContacts").append(formattedEmail);
+    $("#footerContacts").append(formattedEmail);
+
+    var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
+    $("#topContacts").append(formattedTwitter);
+    $("#footerContacts").append(formattedTwitter);
+
+    var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
+    $("#topContacts").append(formattedGithub);
+    $("#footerContacts").append(formattedGithub);
+
+    var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+    $("#topContacts").append(formattedLocation);
+    $("#footerContacts").append(formattedLocation);
+
+    var formattedWelcomeMessage = HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage);
     $("#header").append(formattedWelcomeMessage);
 
+    var profilePicture = HTMLbioPic.replace("%data%", bio.biopic);
+    $("#header").append(profilePicture);
+
     if (bio.skills.length > 0) {
-         for (skill in bio.skills) {
-            $("#header").append(HTMLskillsStart);
+        $("#header").append(HTMLskillsStart);
+        for (skill in bio.skills) {
             var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
-            $("#skills").append(formattedSkill);
+            $("#skills:last").append(formattedSkill);
         }
     }
 }
@@ -66,7 +89,7 @@ var education = {
             "title": "Front-End Web Developer Nanodegree",
             "school": "UDACITY",
             "dates": "2014",
-            "url": "www.udacity.com"
+            "url": "https://www.udacity.com/course/nd001"
         },
         {
             "title": "Python",
@@ -218,19 +241,17 @@ function inName(name) {
 	return name1 + " " + name2;
 }
 
+// display name, picture and contact information
 bio.display();
+
+//display education history
 education.display();
+
+//display past experience
 work.display();
+
+//display past projects
 projects.display();
 
-//$("#header").prepend(internationalizeButton);
+//display related locations on a map
 $("#mapDiv").append(googleMap);
-
-
-
-
-
-//test html
-//var name = HTMLheaderName.replace("%data%", bio.name);
-//$("#main").append(name);
-
