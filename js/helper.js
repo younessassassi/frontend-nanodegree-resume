@@ -79,11 +79,11 @@ clickLocations = [];
 function logClicks(x,y) {
   clickLocations.push(
     {
-      "x": x,
-      "y": y
+      'x': x,
+      'y': y
     }
   );
-  console.log("x location: " + x + "; y location: " + y);
+  console.log('x location: ' + x + '; y location: ' + y);
 }
 
 $(document).click(function(loc) {
@@ -157,8 +157,7 @@ function initializeMap() {
     var lat = placeData.geometry.location.k;  // latitude from the place service
     var lon = placeData.geometry.location.D;  // longitude from the place service
     var name = placeData.formatted_address;   // name of the place from the place service
-    var bounds = window.mapBounds;            // current boundaries of the map window
-
+    var bounds = window.mapBounds;
     // marker is an object with additional data about the pin for a single location
     var marker = new google.maps.Marker({
       map: map,
@@ -170,11 +169,12 @@ function initializeMap() {
     // or hover over a pin on a map. They usually contain more information
     // about a location.
     var infoWindow = new google.maps.InfoWindow({
-      content: name
+      content: name,
+      maxWidth : 200
     });
 
     google.maps.event.addListener(marker, 'click', function() {
-        infoWindow.open(map,marker);
+        infoWindow.open(map, marker);
     });
 
     // this is where the pin actually gets added to the map.
